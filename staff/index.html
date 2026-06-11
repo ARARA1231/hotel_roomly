@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roomly Staff</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo-link" href="#overview" data-go="overview" aria-label="Roomly Staff">
+        <img src="assets/roomly.svg" alt="Roomly" />
+      </a>
+      <nav class="main-nav" aria-label="Навигация панели персонала">
+        <a class="nav-link active" href="#overview" data-page="overview">Главная</a>
+        <a class="nav-link" href="#employees" data-page="employees">Сотрудники</a>
+        <a class="nav-link" href="#shifts" data-page="shifts" data-admin-only>Смены</a>
+        <a class="nav-link" href="#tasks" data-page="tasks">Задачи</a>
+        <a class="nav-link" href="#bookings" data-page="bookings">Бронирования</a>
+        <a class="nav-link" href="#support" data-page="support">Обращения</a>
+        <a class="nav-link" href="#audit" data-page="audit" data-admin-only>Аудит</a>
+        <a class="nav-link" href="http://127.0.0.1:5173" target="_blank" rel="noopener">Основной сайт</a>
+      </nav>
+      <button class="session-button" id="logoutButton" type="button" hidden>Выйти</button>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <section class="login-card" id="loginCard">
+      <div class="section-head compact-head">
+        <h1>ВХОД В СИСТЕМУ</h1>
+        <p>Панель менеджмента персонала Roomly связана с основным сайтом: новые бронирования автоматически превращаются в задачи персоналу.</p>
+      </div>
+      <form class="form-grid login-form" id="loginForm">
+        <label>Email
+          <input name="email" type="email" value="admin@roomly.local" required />
+        </label>
+        <label>Пароль
+          <input name="password" type="password" value="Admin12345" required />
+        </label>
+        <button class="primary-button" type="submit">Войти</button>
+      </form>
+      <p class="hint">Демо-аккаунты: admin@roomly.local / Admin12345, ivan.petrov@roomly.local / Admin12345. Сотрудник видит рабочие разделы, но не управляет сменами и настройками.</p>
+    </section>
+
+    <div id="appContent" hidden>
+      <section class="view active" id="overview" data-title="Главная">
+        <div class="crumbs"><span>Главная</span><b>/</b><strong>Менеджмент персонала</strong></div>
+        <div class="section-head">
+          <h1>ПАНЕЛЬ ПЕРСОНАЛА</h1>
+          <p>Сводка по сотрудникам, сменам и задачам отельной сети Roomly.</p>
+        </div>
+
+        <div class="stats-grid" aria-label="Статистика персонала">
+          <article class="stat-card"><span class="stat-label">Сотрудников</span><strong id="metricEmployees">0</strong><small>в базе персонала</small></article>
+          <article class="stat-card"><span class="stat-label">Активных</span><strong id="metricActive">0</strong><small>доступны к работе</small></article>
+          <article class="stat-card"><span class="stat-label">Смен сегодня</span><strong id="metricShifts">0</strong><small>по всем отелям</small></article>
+          <article class="stat-card"><span class="stat-label">Открытых задач</span><strong id="metricTasks">0</strong><small>нужно обработать</small></article>
+          <article class="stat-card"><span class="stat-label">Новых броней</span><strong id="metricBookings">0</strong><small>ожидают обработки</small></article>
+          <article class="stat-card"><span class="stat-label">Открытых обращений</span><strong id="metricSupport">0</strong><small>нужен ответ</small></article>
+        </div>
+
+        <div class="two-columns">
+          <section class="panel">
+            <div class="panel-title"><h2>Ближайшие смены</h2><a href="#shifts" data-go="shifts" data-admin-only>Все смены</a></div>
+            <div class="compact-list" id="overviewShifts"></div>
+          </section>
+          <section class="panel">
+            <div class="panel-title"><h2>Задачи персонала</h2><a href="#tasks" data-go="tasks">Все задачи</a></div>
+            <div class="compact-list" id="overviewTasks"></div>
+          </section>
+        </div>
+        <div class="two-columns">
+          <section class="panel">
+            <div class="panel-title"><h2>Последние бронирования</h2><a href="#bookings" data-go="bookings">Все бронирования</a></div>
+            <div class="compact-list" id="overviewBookings"></div>
+          </section>
+          <section class="panel">
+            <div class="panel-title"><h2>Новые обращения</h2><a href="#support" data-go="support">Все обращения</a></div>
+            <div class="compact-list" id="overviewSupport"></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="employees" data-title="Сотрудники">
+        <div class="crumbs"><span>Главная</span><b>/</b><strong>Сотрудники</strong></div>
+        <div class="section-head">
+          <h1>СОТРУДНИКИ</h1>
+          <p>Учет сотрудников, отделов, должностей, статусов и привязки к отелям.</p>
+        </div>
+
+        <section class="panel form-panel" data-admin-only>
+          <div class="panel-title"><h2>Добавить сотрудника</h2></div>
+          <form class="form-grid employee-form" id="employeeForm">
+            <label>Имя<input name="firstName" required minlength="2" /></label>
+            <label>Фамилия<input name="lastName" required minlength="2" /></label>
+            <label>Email<input name="email" type="email" required /></label>
+            <label>Телефон<input name="phone" required /></label>
+            <label>Должность<input name="position" required /></label>
+            <label>Отель<select name="hotelId" id="employeeHotelSelect" required></select></label>
+            <label>Отдел<select name="departmentId" id="employeeDepartmentSelect" required></select></label>
+            <label>Дата приема<input name="hiredAt" type="date" required /></label>
+            <label>Оклад<input name="salary" type="number" min="0" value="60000" required /></label>
+            <button class="primary-button" type="submit">Сохранить сотрудника</button>
+          </form>
+        </section>
+
+        <section class="panel wide-panel">
+          <table class="admin-table">
+            <thead><tr><th>Сотрудник</th><th>Должность</th><th>Отель</th><th>Статус</th><th>Действие</th></tr></thead>
+            <tbody id="employeesTable"></tbody>
+          </table>
+        </section>
+      </section>
+
+      <section class="view" id="shifts" data-title="Смены" data-admin-only-section>
+        <div class="crumbs"><span>Главная</span><b>/</b><strong>Смены</strong></div>
+        <div class="section-head">
+          <h1>СМЕНЫ</h1>
+          <p>Планирование рабочих смен без пересечений по времени.</p>
+        </div>
+
+        <section class="panel form-panel">
+          <div class="panel-title"><h2>Назначить смену</h2></div>
+          <form class="form-grid shift-form" id="shiftForm">
+            <label>Сотрудник<select name="employeeId" id="shiftEmployeeSelect" required></select></label>
+            <label>Отель<select name="hotelId" id="shiftHotelSelect" required></select></label>
+            <label>Начало<input name="startsAt" type="datetime-local" required /></label>
+            <label>Окончание<input name="endsAt" type="datetime-local" required /></label>
+            <label>Роль на смене<input name="role" value="Ресепшен" required /></label>
+            <label>Примечание<input name="note" /></label>
+            <button class="primary-button" type="submit">Создать смену</button>
+          </form>
+        </section>
+
+        <section class="panel wide-panel">
+          <table class="admin-table">
+            <thead><tr><th>Сотрудник</th><th>Отель</th><th>Начало</th><th>Окончание</th><th>Статус</th></tr></thead>
+            <tbody id="shiftsTable"></tbody>
+          </table>
+        </section>
+      </section>
+
+      <section class="view" id="tasks" data-title="Задачи">
+        <div class="crumbs"><span>Главная</span><b>/</b><strong>Задачи</strong></div>
+        <div class="section-head">
+          <h1>ЗАДАЧИ</h1>
+          <p>Постановка задач сотрудникам и контроль выполнения.</p>
+        </div>
+
+        <section class="panel form-panel" data-admin-only>
+          <div class="panel-title"><h2>Создать задачу</h2></div>
+          <form class="form-grid task-form" id="taskForm">
+            <label>Название<input name="title" required minlength="3" /></label>
+            <label>Сотрудник<select name="employeeId" id="taskEmployeeSelect" required></select></label>
+            <label>Отель<select name="hotelId" id="taskHotelSelect" required></select></label>
+            <label>Приоритет<select name="priority"><option value="low">Низкий</option><option value="medium" selected>Средний</option><option value="high">Высокий</option></select></label>
+            <label>Срок<input name="dueDate" type="date" required /></label>
+            <label class="full-field">Описание<textarea name="description" rows="3"></textarea></label>
+            <button class="primary-button" type="submit">Создать задачу</button>
+          </form>
+        </section>
+
+        <section class="panel filter-panel">
+          <div class="filter-row">
+            <label>Статус задач<select id="taskStatusFilter"><option value="">Все</option><option value="open">Открытые</option><option value="in_progress">В работе</option><option value="done">Готово</option></select></label>
+          </div>
+        </section>
+
+        <section class="panel wide-panel">
+          <table class="admin-table">
+            <thead><tr><th>Задача</th><th>Сотрудник</th><th>Приоритет</th><th>Срок</th><th>Статус</th><th>Действие</th></tr></thead>
+            <tbody id="tasksTable"></tbody>
+          </table>
+        </section>
+      </section>
+
+
+      <section class="view" id="bookings" data-title="Бронирования">
+        <div class="crumbs"><span>Главная</span><b>/</b><strong>Бронирования</strong></div>
+        <div class="section-head">
+          <h1>БРОНИРОВАНИЯ</h1>
+          <p>Заявки с основного сайта Roomly попадают в этот раздел. Сотрудник или администратор может подтвердить, отменить или завершить бронирование, а действие будет сохранено в журнале.</p>
+        </div>
+
+        <section class="panel filter-panel">
+          <div class="filter-row">
+            <label>Статус бронирования<select id="bookingStatusFilter"><option value="">Все</option><option value="confirmed">Подтверждено</option><option value="pending">Ожидает</option><option value="cancelled">Отменено</option><option value="completed">Завершено</option></select></label>
+            <label>Поиск<input id="bookingSearch" type="search" placeholder="Клиент, email, отель" /></label>
+            <button class="secondary-button" type="button" id="refreshBookingsButton">Обновить</button>
+          </div>
+        </section>
+
+        <section class="panel wide-panel">
+          <table class="admin-table">
+            <thead><tr><th>Клиент</th><th>Отель</th><th>Даты</th><th>Сумма</th><th>Статус</th><th>Действия</th></tr></thead>
+            <tbody id="bookingsTable"></tbody>
+          </table>
+        </section>
+      </section>
+
+      <section class="view" id="support" data-title="Обращения клиентов">
+        <div class="crumbs"><span>Главная</span><b>/</b><strong>Обращения клиентов</strong></div>
+        <div class="section-head">
+          <h1>ОБРАЩЕНИЯ КЛИЕНТОВ</h1>
+          <p>Вопросы с основного сайта Roomly приходят сюда. Администратор или менеджер может открыть диалог, ответить клиенту и закрыть обращение после решения вопроса.</p>
+        </div>
+
+        <div class="support-workspace">
+          <section class="panel wide-panel support-list-panel">
+            <div class="panel-title support-title"><h2>Список обращений</h2><button class="secondary-button" type="button" id="refreshSupportButton">Обновить</button></div>
+            <div class="filter-row support-filter-row"><label>Статус обращения<select id="supportStatusFilter"><option value="">Все</option><option value="new">Новые</option><option value="in_progress">В работе</option><option value="resolved">Решенные</option><option value="closed">Закрытые</option></select></label><label>Поиск<input id="supportSearch" type="search" placeholder="Имя, email, текст" /></label></div>
+            <table class="admin-table support-table">
+              <thead><tr><th>Клиент</th><th>Статус</th><th>Последнее сообщение</th><th>Обновлено</th><th>Действие</th></tr></thead>
+              <tbody id="supportTable"></tbody>
+            </table>
+          </section>
+
+          <section class="panel support-dialog-panel">
+            <div class="panel-title"><h2>Диалог</h2><button class="secondary-button" type="button" id="closeSupportButton" data-admin-only>Закрыть обращение</button></div>
+            <div class="support-dialog" id="supportDialog">
+              <p class="hint">Выберите обращение из списка, чтобы открыть переписку с клиентом.</p>
+            </div>
+            <form class="support-reply-form" id="supportReplyForm">
+              <label>Ответ клиенту<textarea name="message" rows="4" placeholder="Введите ответ клиенту"></textarea></label>
+              <button class="primary-button" type="submit">Отправить ответ</button>
+            </form>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="audit" data-title="Аудит" data-admin-only-section>
+        <div class="crumbs"><span>Главная</span><b>/</b><strong>Аудит</strong></div>
+        <div class="section-head">
+          <h1>ЖУРНАЛ ДЕЙСТВИЙ</h1>
+          <p>Журнал нужен для контроля безопасности и подтверждения действий пользователей.</p>
+        </div>
+
+        <section class="panel integration-panel">
+          <div class="panel-title"><h2>Совместимость с основным сайтом Roomly</h2></div>
+          <p id="integrationStatus" class="hint" aria-live="polite">Проверка подключения не выполнялась.</p>
+          <p class="hint">При создании, изменении или отмене бронирования основной backend отправляет событие в Staff API. На его основе создаётся или обновляется задача заселения.</p>
+          <button class="secondary-button" type="button" id="checkIntegrationButton">Проверить связь</button>
+        </section>
+
+        <section class="panel wide-panel">
+          <div class="panel-title support-title"><h2>Журнал Staff-панели</h2></div>
+          <table class="admin-table">
+            <thead><tr><th>Дата</th><th>Пользователь</th><th>Действие</th><th>Объект</th></tr></thead>
+            <tbody id="auditTable"></tbody>
+          </table>
+        </section>
+
+        <section class="panel wide-panel">
+          <div class="panel-title support-title"><h2>Журнал основного сайта</h2></div>
+          <table class="admin-table">
+            <thead><tr><th>Дата</th><th>Роль</th><th>Действие</th><th>Детали</th></tr></thead>
+            <tbody id="mainAuditTable"></tbody>
+          </table>
+        </section>
+      </section>
+
+
+      <section class="view" id="forbidden" data-title="Доступ запрещён">
+        <div class="crumbs"><span>Главная</span><b>/</b><strong>Доступ запрещён</strong></div>
+        <div class="section-head">
+          <h1>ДОСТУП ЗАПРЕЩЁН</h1>
+          <p>У вашей роли нет прав на этот раздел. Сотрудник работает с задачами, обращениями и бронированиями, а управление сменами, сотрудниками и аудитом доступно администратору.</p>
+        </div>
+        <section class="panel"><button class="primary-button" type="button" data-go="overview">Вернуться на главную</button></section>
+      </section>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <footer class="admin-footer">
+    <div class="footer-inner">
+      <p>Система менеджмента<br>персонала отелей</p>
+      <a class="footer-logo" href="#overview" data-go="overview" aria-label="Roomly"><img src="assets/roomly-footer.svg" alt="Roomly"></a>
+      <p class="contacts"><strong>Наши контакты:</strong><br>support@roomly.com<br>+7 (999) 123-45-67</p>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>

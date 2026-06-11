@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roomly — личный кабинет</title>
+  <link rel="stylesheet" href="roomly-clean.css?v=20260611-auth" />
+</head>
+<body>
+  <main class="rm-page" data-roomly-page aria-label="Roomly — личный кабинет">
+    <header class="rm-header">
+      <div class="rm-container rm-header__inner">
+        <a class="rm-logo" href="index.html">Roomly</a>
+        <nav class="rm-nav" aria-label="Основная навигация"><a href="index.html">Главная</a><a href="catalog.html">Отели</a><a href="collections.html">Подборки</a><a href="support.html">Тех. поддержка</a><a data-staff-link hidden href="http://127.0.0.1:5174" target="_blank" rel="noopener">Персонал</a></nav>
+        <div class="rm-profile"><button class="rm-profile__button" type="button" data-profile aria-label="Открыть меню личного кабинета"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12.5a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm0 2c-4.1 0-7.5 2.55-7.5 5.2 0 .55.45 1 1 1h13c.55 0 1-.45 1-1 0-2.65-3.4-5.2-7.5-5.2Z" fill="currentColor"/></svg></button><div class="rm-profile__menu" data-profile-menu data-auth-menu><a href="account.html">Личный кабинет</a><a href="support.html">Поддержка</a></div></div>
+      </div>
+    </header>
+    <div class="rm-container">
+      <div class="rm-breadcrumbs"><a href="index.html">Главная</a><span>/</span><strong>Личный кабинет</strong></div>
+      <h1 class="rm-title">Мой аккаунт</h1>
+      <section class="rm-auth-card" data-auth-panel aria-label="Авторизация пользователя">
+        <div class="rm-auth-intro">
+          <h2>Вход и регистрация</h2>
+          <p>Гость может просматривать сайт. Чтобы создать бронирование, нужно войти как пользователь. Сотрудник и администратор после входа увидят ссылку на раздел «Персонал».</p>
+          <p class="rm-auth-demo">Демо: user@roomly.local / Admin12345, ivan.petrov@roomly.local / Admin12345, admin@roomly.local / Admin12345</p>
+        </div>
+        <div class="rm-auth-grid">
+          <form class="rm-form rm-auth-form" data-login-form autocomplete="on">
+            <h3>Войти</h3>
+            <div class="rm-field"><label>Email<input name="email" type="email" value="user@roomly.local" required></label></div>
+            <div class="rm-field"><label>Пароль<input name="password" type="password" value="Admin12345" required></label></div>
+            <button type="submit">Войти →</button>
+          </form>
+          <form class="rm-form rm-auth-form" data-register-form autocomplete="on">
+            <h3 id="register">Регистрация пользователя</h3>
+            <div class="rm-field"><label>Имя<input name="name" type="text" placeholder="Иван Петров" required minlength="2"></label></div>
+            <div class="rm-field"><label>Email<input name="email" type="email" placeholder="ivan@example.com" required></label></div>
+            <div class="rm-field"><label>Телефон<input name="phone" type="tel" placeholder="+7 999 123-45-67"></label></div>
+            <div class="rm-field"><label>Пароль<input name="password" type="password" placeholder="Минимум 8 символов" required minlength="8"></label></div>
+            <button type="submit">Создать аккаунт →</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="rm-account-card" data-session-panel hidden aria-label="Данные пользователя">
+        <div class="rm-account-person">
+          <h2 data-current-user-name>Пользователь</h2>
+          <ul data-current-user-info>
+            <li>Email: —</li>
+            <li>Роль: —</li>
+          </ul>
+          <button class="rm-logout-button" type="button" data-logout>Выйти из аккаунта</button>
+        </div>
+        <div class="rm-account-bookings" data-account-bookings>
+          <h2>Мои бронирования:</h2>
+          <div class="rm-account-bookings-list" data-account-bookings-list>
+            <p>Бронирования загружаются...</p>
+          </div>
+
+          <h2 class="rm-account-subtitle">Мои обращения:</h2>
+          <div class="rm-account-support-list" data-account-support-list>
+            <p>Обращения загружаются...</p>
+          </div>
+        </div>
+      </section>
+    </div>
+    <footer class="rm-footer"><div class="rm-container rm-footer__inner"><p class="rm-footer__service">Сервис бронирования<br>отелей по всему миру</p><a class="rm-footer__logo" href="index.html">Roomly</a><div class="rm-footer__contacts"><strong>Наши контакты:</strong><a href="mailto:support@roomly.com">support@roomly.com</a><a href="tel:+79991234567">+7 (999) 123-45-67</a></div></div></footer>
+  </main>
+  <div class="rm-toast" data-toast></div>
+  <script type="module" src="roomly-clean.js?v=20260611-auth"></script>
+</body>
+</html>

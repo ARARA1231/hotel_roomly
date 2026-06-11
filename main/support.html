@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roomly — тех. поддержка</title>
+  <link rel="stylesheet" href="roomly-clean.css?v=20260611-auth" />
+</head>
+<body>
+  <main class="rm-page" data-roomly-page aria-label="Roomly — тех. поддержка">
+    <header class="rm-header">
+      <div class="rm-container rm-header__inner">
+        <a class="rm-logo" href="index.html">Roomly</a>
+        <nav class="rm-nav" aria-label="Основная навигация"><a href="index.html">Главная</a><a href="catalog.html">Отели</a><a href="collections.html">Подборки</a><a class="rm-active" href="support.html">Тех. поддержка</a><a data-staff-link hidden href="http://127.0.0.1:5174" target="_blank" rel="noopener">Персонал</a></nav>
+        <div class="rm-profile"><button class="rm-profile__button" type="button" data-profile aria-label="Открыть меню личного кабинета"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12.5a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm0 2c-4.1 0-7.5 2.55-7.5 5.2 0 .55.45 1 1 1h13c.55 0 1-.45 1-1 0-2.65-3.4-5.2-7.5-5.2Z" fill="currentColor"/></svg></button><div class="rm-profile__menu" data-profile-menu data-auth-menu><a href="account.html">Личный кабинет</a><a href="support.html">Поддержка</a></div></div>
+      </div>
+    </header>
+    <div class="rm-container">
+      <div class="rm-breadcrumbs"><a href="index.html">Главная</a><span>/</span><strong>Тех. поддержка</strong></div>
+      <h1 class="rm-title">Тех. поддержка</h1>
+      <section class="rm-support-layout">
+        <aside class="rm-support-note"><p>Опишите проблему с бронированием, оплатой или работой сайта. После отправки будет создан диалог с администратором. Ответ появится на этой странице, а при необходимости вы сможете написать уточнение.</p></aside>
+        <form class="rm-form" data-support-form autocomplete="off" aria-label="Форма техподдержки">
+          <div class="rm-field"><label>Ваше имя<input name="name" type="text" placeholder="Иван Петров" required></label></div>
+          <div class="rm-field"><label>Email<input name="email" type="email" placeholder="ivan@example.com" required></label></div>
+          <div class="rm-field"><label>Сообщение<textarea name="message" placeholder="Опишите вопрос или проблему" required></textarea></label></div>
+          <button type="submit">Отправить →</button>
+        </form>
+      </section>
+
+      <section class="rm-support-dialog-panel" data-support-dialog-panel hidden>
+        <div class="rm-support-dialog-head">
+          <h2>Диалог с поддержкой</h2>
+          <p data-support-dialog-status>Обращение создано</p>
+        </div>
+        <div class="rm-support-dialog" data-support-dialog></div>
+        <form class="rm-form rm-support-reply-form" data-support-reply-form autocomplete="off">
+          <div class="rm-field"><label>Ваше сообщение<textarea name="message" placeholder="Напишите уточнение или ответ администратору" required></textarea></label></div>
+          <button type="submit">Отправить сообщение →</button>
+        </form>
+      </section>
+    </div>
+    <footer class="rm-footer"><div class="rm-container rm-footer__inner"><p class="rm-footer__service">Сервис бронирования<br>отелей по всему миру</p><a class="rm-footer__logo" href="index.html">Roomly</a><div class="rm-footer__contacts"><strong>Наши контакты:</strong><a href="mailto:support@roomly.com">support@roomly.com</a><a href="tel:+79991234567">+7 (999) 123-45-67</a></div></div></footer>
+  </main>
+  <div class="rm-toast" data-toast></div>
+  <script type="module" src="roomly-clean.js?v=20260611-auth"></script>
+</body>
+</html>

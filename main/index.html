@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roomly — бронирование отелей</title>
+  <link rel="stylesheet" href="roomly-clean.css?v=20260611-auth" />
+</head>
+<body>
+  <main class="rm-page" data-roomly-page aria-label="Roomly — главная">
+    <header class="rm-header">
+      <div class="rm-container rm-header__inner">
+        <a class="rm-logo" href="index.html">Roomly</a>
+        <nav class="rm-nav" aria-label="Основная навигация">
+          <a class="rm-active" href="index.html">Главная</a>
+          <a href="catalog.html">Отели</a>
+          <a href="collections.html">Подборки</a>
+          <a href="support.html">Тех. поддержка</a>
+          <a data-staff-link hidden href="http://127.0.0.1:5174" target="_blank" rel="noopener">Персонал</a>
+        </nav>
+        <div class="rm-profile">
+          <button class="rm-profile__button" type="button" data-profile aria-label="Открыть меню личного кабинета"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12.5a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm0 2c-4.1 0-7.5 2.55-7.5 5.2 0 .55.45 1 1 1h13c.55 0 1-.45 1-1 0-2.65-3.4-5.2-7.5-5.2Z" fill="currentColor"/></svg></button>
+          <div class="rm-profile__menu" data-profile-menu data-auth-menu>
+            <a href="account.html">Личный кабинет</a>
+            <a href="support.html">Поддержка</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="rm-hero">
+      <div class="rm-container">
+        <h1>Найдите отель для следующей поездки</h1>
+        <p>Roomly помогает подобрать номер, проверить условия проживания и создать бронь через backend.</p>
+        <form class="rm-search" data-search-form aria-label="Форма поиска отеля">
+          <button class="rm-search__control" type="button" data-search-control data-filter="location" data-value="paris">Франция, Париж</button>
+          <button class="rm-search__control" type="button" data-search-control data-filter="guests" data-value="2">2 гостя</button>
+          <button class="rm-search__control" type="button" data-search-control data-filter="date" data-value="may">12 мая - 19 мая</button>
+          <button class="rm-search__control" type="button" data-search-control data-filter="budget" data-value="mid">50,000-150,000</button>
+          <button class="rm-search__submit" type="submit">Найти →</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="rm-section">
+      <div class="rm-container">
+        <h2 class="rm-section-title">Популярные направления</h2>
+        <div class="rm-destination-grid">
+          <a class="rm-destination-card" href="hotel.html?id=lekki-paris"><img src="assets/hotels/dest-paris.jpg" alt="Париж"><h3>Париж</h3><p>Отели рядом с главными достопримечательностями.</p></a>
+          <a class="rm-destination-card" href="hotel.html?id=ikeja-lagos"><img src="assets/hotels/dest-lagos.jpg" alt="Лагос"><h3>Лагос</h3><p>Городские отели для деловых поездок.</p></a>
+          <a class="rm-destination-card" href="hotel.html?id=jabi-dubai"><img src="assets/hotels/dest-dubai.jpg" alt="Дубай"><h3>Дубай</h3><p>Премиальные варианты для отдыха.</p></a>
+          <a class="rm-destination-card" href="hotel.html?id=ikeja-london"><img src="assets/hotels/dest-london.jpg" alt="Лондон"><h3>Лондон</h3><p>Удобное размещение в спокойных районах.</p></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="rm-section rm-why">
+      <div class="rm-container">
+        <h2 class="rm-section-title">Почему Roomly</h2>
+        <div class="rm-why-grid">
+          <article class="rm-feature"><h3>Удобное бронирование</h3><p>Выберите направление, даты и номер без лишних шагов — оформление занимает несколько минут.</p></article>
+          <article class="rm-feature"><h3>Отели под разные поездки</h3><p>В каталоге есть варианты для деловой поездки, семейного отдыха, короткой остановки и спокойного отпуска.</p></article>
+          <article class="rm-feature"><h3>Поддержка гостей</h3><p>Если возник вопрос по бронированию или проживанию, можно создать обращение и продолжить диалог с администратором.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="rm-section">
+      <div class="rm-container">
+        <h2 class="rm-section-title">Лучшие предложения</h2>
+        <div class="rm-card-grid rm-card-grid--five">
+          <a class="rm-hotel-card" href="hotel.html?id=ikeja-lagos"><img src="assets/hotels/ikeja-lagos-main.jpg" alt="Ikeja, Лагос"><h3>Ikeja, Лагос</h3><p>Современный городской отель.</p><span class="rm-meta">от 8 490 ₽ / ночь</span></a>
+          <a class="rm-hotel-card" href="hotel.html?id=jabi-dubai"><img src="assets/hotels/jabi-dubai-main.jpg" alt="Jabi, Дубай"><h3>Jabi, Дубай</h3><p>Отель с бассейном и зоной отдыха.</p><span class="rm-meta">от 10 490 ₽ / ночь</span></a>
+          <a class="rm-hotel-card" href="hotel.html?id=arara-lagos"><img src="assets/hotels/arara-lagos-main.jpg" alt="Arara, Лагос"><h3>Arara, Лагос</h3><p>Уютный вариант по доступной цене.</p><span class="rm-meta">от 6 490 ₽ / ночь</span></a>
+          <a class="rm-hotel-card" href="hotel.html?id=lekki-paris"><img src="assets/hotels/lekki-paris-main.jpg" alt="Lekki, Париж"><h3>Lekki, Париж</h3><p>Европейская атмосфера и комфорт.</p><span class="rm-meta">от 7 490 ₽ / ночь</span></a>
+          <a class="rm-hotel-card" href="hotel.html?id=ikeja-london"><img src="assets/hotels/ikeja-london-main.jpg" alt="Ikeja, Лондон"><h3>Ikeja, Лондон</h3><p>Спокойный район и удобная логистика.</p><span class="rm-meta">от 11 490 ₽ / ночь</span></a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="rm-footer">
+      <div class="rm-container rm-footer__inner">
+        <p class="rm-footer__service">Сервис бронирования<br>отелей по всему миру</p>
+        <a class="rm-footer__logo" href="index.html">Roomly</a>
+        <div class="rm-footer__contacts"><strong>Наши контакты:</strong><a href="mailto:support@roomly.com">support@roomly.com</a><a href="tel:+79991234567">+7 (999) 123-45-67</a></div>
+      </div>
+    </footer>
+  </main>
+  <div class="rm-toast" data-toast></div>
+  <script type="module" src="roomly-clean.js?v=20260611-auth"></script>
+</body>
+</html>

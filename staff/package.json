@@ -1,0 +1,28 @@
+{
+  "name": "roomly-staff-management",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Roomly Staff Management frontend and REST API backend for coursework",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5174",
+    "dev:frontend": "vite --host 127.0.0.1 --port 5174",
+    "dev:backend": "node backend/src/server.js",
+    "dev:full": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "start": "node backend/src/server.js",
+    "test": "node --test backend/tests/*.test.js",
+    "seed": "node backend/scripts/seed.js",
+    "backup": "node backend/scripts/backup.js",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "concurrently": "latest",
+    "cors": "latest",
+    "express": "latest",
+    "helmet": "latest",
+    "morgan": "latest",
+    "vite": "latest",
+    "zod": "latest"
+  },
+  "devDependencies": {}
+}

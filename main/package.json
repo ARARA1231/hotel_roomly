@@ -1,0 +1,35 @@
+{
+  "name": "roomly-coursework",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "frontend": "vite --host 127.0.0.1",
+    "backend": "node backend/src/server.js",
+    "backend:dev": "nodemon backend/src/server.js",
+    "dev:full": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "seed": "node backend/src/seed.js",
+    "seed:reset": "node backend/src/seed.js --reset",
+    "test": "node --test backend/tests/*.test.js",
+    "build": "vite build",
+    "start": "node backend/src/server.js"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^9.1.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.18.3",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "react": "latest",
+    "react-dom": "latest",
+    "vite": "latest",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}

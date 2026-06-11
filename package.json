@@ -1,0 +1,19 @@
+{
+  "name": "roomly-unified-coursework",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Единый курсовой проект Roomly: бронирование отелей + управление персоналом",
+  "scripts": {
+    "install:all": "npm --prefix main install && npm --prefix staff install",
+    "dev:main": "npm --prefix main run dev:full",
+    "dev:staff": "npm --prefix staff run dev:full",
+    "dev:all": "concurrently \"npm run dev:main\" \"npm run dev:staff\"",
+    "test:main": "npm --prefix main test",
+    "test:staff": "npm --prefix staff test",
+    "test": "npm run test:main && npm run test:staff",
+    "build": "npm --prefix main run build && npm --prefix staff run build"
+  },
+  "dependencies": {
+    "concurrently": "latest"
+  }
+}
